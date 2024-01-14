@@ -49,14 +49,11 @@ caradvoj_dlouha = 50*"="
 carajedno_dlouha = 50*"-"
 
 # Přihlášení uživatele - zadání údajů:
-print(caradvoj_kratka)
-print("TEXT ANALYZER")
-print(caradvoj_kratka)
-jmeno = input("Enter your username:\n")
+print(f"{caradvoj_kratka}\nTEXT ANALYZER\n{caradvoj_kratka}")
+jmeno = input(f"Enter your username:\n")
 print(carajedno_kratka)
-heslo = input("Enter your password:\n")
+heslo = input(f"Enter your password:\n")
 print(caradvoj_dlouha)
-
 # Přihlášení uživatele - vyhodnocení zadaných údajů:
 if uzivatele.get(jmeno) == heslo:
     print(f"Welcome to the TEXT ANALYZER application, {jmeno}.")
@@ -66,23 +63,18 @@ else:
     exit()
 
 # Výběr jednoho z textů:
-pripustne_vstupy = ("1", "2", "3")
-print("Select one of the texts to analyze and enter its number:")
-print(carajedno_dlouha)
-print(pripustne_vstupy[0] + "\n\n" + TEXTS[0])
-print(carajedno_dlouha)
-print(pripustne_vstupy[1] + "\n\n" + TEXTS[1])
-print(carajedno_dlouha)
-print(pripustne_vstupy[2] + "\n\n" + TEXTS[2])
-print(carajedno_dlouha)
+print(f"Select one of the texts to analyze and enter its number:\n{carajedno_dlouha}")
+for poradi, text in enumerate(TEXTS, 1):
+    print(f"{poradi}:\n\n{text}\n{carajedno_dlouha}")
 
-vybrany_text = input()
-if vybrany_text == pripustne_vstupy[0]:
-    TEXT_FINAL_LIST = TEXTS[0].split( )
-elif vybrany_text == pripustne_vstupy[1]:
-    TEXT_FINAL_LIST = TEXTS[1].split( )
-elif vybrany_text == pripustne_vstupy[2]:
-    TEXT_FINAL_LIST = TEXTS[2].split( )
+pripustne_vstupy = []
+for poradi in enumerate(TEXTS, 1):
+    pripustne_vstupy.append(poradi[0])
+# print(pripustne_vstupy)
+
+vybrany_text = int(input())
+if vybrany_text in pripustne_vstupy:
+    TEXT_FINAL_LIST = TEXTS[vybrany_text - 1].split( )
 else:
     print(caradvoj_dlouha)
     print(f"'{vybrany_text}' input is incorrect, the program will be terminated.")
@@ -98,66 +90,39 @@ print(caradvoj_dlouha)
 # Analyzované parametry textu:
 # Počet slov textu:
 pocet_slov = len(TEXT_FINAL_LIST)
-print("Number of words in text:", pocet_slov)
-print(carajedno_dlouha)
+print(f"Number of words in text: {pocet_slov}\n{carajedno_dlouha}")
 
-# Počet slov začínajících velkým písmenem:
-pocet_slov_Title = 0
+pocet_slov_Title = 0    # Počet slov začínajících velkým písmenem:
+pocet_slov_UPPER = 0    # Počet slov psaných velkými písmeny:
+pocet_slov_lower = 0    # Počet slov psaných malými písmeny:
+pocet_cisel = 0         # Počet čísel:
+soucet_cisel = 0        # Součet všech čísel:
+delky_slov = []
+
 for slovo in TEXT_FINAL_LIST:
     if slovo.istitle():
         pocet_slov_Title += 1
-        # print(slovo)      # Kontrolní print selektovaných slov
-print("Number of titlecase words:", pocet_slov_Title)
-print(carajedno_dlouha)
-
-# Počet slov psaných velkými písmeny:
-pocet_slov_UPPER = 0
-for slovo in TEXT_FINAL_LIST:
-    if slovo.isupper():
+    elif slovo.isupper():
         pocet_slov_UPPER += 1
-        # print(slovo)      # Kontrolní print selektovaných slov
-print("Number of uppercase words:", pocet_slov_UPPER)
-print(carajedno_dlouha)
-
-# Počet slov psaných malými písmeny:
-pocet_slov_lower = 0
-for slovo in TEXT_FINAL_LIST:
-    if slovo.islower():
+    elif slovo.islower():
         pocet_slov_lower += 1
-        # print(slovo)      # Kontrolní print selektovaných slov
-print("Number of lowercase words:", pocet_slov_lower)       
-print(carajedno_dlouha)
-
-# Počet čísel:
-pocet_cisel = 0
-for slovo in TEXT_FINAL_LIST:
-    if slovo.isnumeric():
+    elif slovo.isnumeric():
         pocet_cisel += 1
-        # print(slovo)      # Kontrolní print selektovaných čísel
-print("Number of numeric strings:", pocet_cisel)      
-print(carajedno_dlouha)
-
-# Součet všech čísel:
-soucet_cisel = 0
-for slovo in TEXT_FINAL_LIST:
-    if slovo.isnumeric():
         slovo = int(slovo)
         soucet_cisel += slovo
-        # print(slovo)      # Kontrolní print selektovaných čísel
-print("The sum of all the numbers:", soucet_cisel)        
-print(carajedno_dlouha)
+    
+print(f"Number of titlecase words: {pocet_slov_Title}\n{carajedno_dlouha}")
+print(f"Number of uppercase words: {pocet_slov_UPPER}\n{carajedno_dlouha}")
+print(f"Number of lowercase words: {pocet_slov_lower}\n{carajedno_dlouha}")       
+print(f"Number of numeric strings: {pocet_cisel}\n{carajedno_dlouha}")      
+print(f"The sum of all the numbers: {soucet_cisel}\n{carajedno_dlouha}")        
 
 # Četnost délek slov:
-# Převod listu se slovy vybraného textu na list s délkou
-# jednotlivých slov tohoto textu (slova očištěna od diakritiky)
-delky_slov = []
 for slovo in TEXT_FINAL_LIST:
     ciste_slovo = slovo.strip(".,!? ")
     delky_slov.append(len(ciste_slovo))
 # print(delky_slov)         # Kontrolní print listu
 
-# Převod listu s délkou jednotlivých slov vybraného textu
-# na set s výčtem všech vyskytujících se délek slov
 vycet_delek_slov = set(delky_slov)
 # print(vycet_delek_slov)   # Kontrolní print setu
 
