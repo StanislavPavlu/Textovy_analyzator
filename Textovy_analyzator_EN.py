@@ -54,11 +54,12 @@ jmeno = input(f"Enter your username:\n")
 print(carajedno_kratka)
 heslo = input(f"Enter your password:\n")
 print(caradvoj_dlouha)
+
 # Přihlášení uživatele - vyhodnocení zadaných údajů:
 if uzivatele.get(jmeno) == heslo:
     print(f"Welcome to the TEXT ANALYZER application, {jmeno}.")
 else:
-    print("Incorrect user name or password, the program will be terminated.")
+    print("Incorrect user name or password.\nThe program will be terminated.")
     print(caradvoj_dlouha)
     exit()
 
@@ -68,16 +69,23 @@ for poradi, text in enumerate(TEXTS, 1):
     print(f"{poradi}:\n\n{text}\n{carajedno_dlouha}")
 
 pripustne_vstupy = []
-for poradi in enumerate(TEXTS, 1):
-    pripustne_vstupy.append(poradi[0])
-# print(pripustne_vstupy)
+for dvojice in enumerate(TEXTS, 1):
+    pripustne_vstupy.append(dvojice[0])
+    # print(pripustne_vstupy)
 
-vybrany_text = int(input())
-if vybrany_text in pripustne_vstupy:
-    TEXT_FINAL_LIST = TEXTS[vybrany_text - 1].split( )
+vybrany_text = input()
+if vybrany_text.isnumeric():
+    vybrany_text = int(vybrany_text)
+    if vybrany_text in pripustne_vstupy:
+        TEXT_FINAL_LIST = TEXTS[vybrany_text - 1].split( )
+    else:
+        print(caradvoj_dlouha)
+        print(f"Input '{vybrany_text}' is incorrect.\nInput needs to be number between {pripustne_vstupy[0]} and {pripustne_vstupy[-1]}.\nThe program will be terminated.")
+        print(caradvoj_dlouha)
+        exit()
 else:
     print(caradvoj_dlouha)
-    print(f"'{vybrany_text}' input is incorrect, the program will be terminated.")
+    print(f"Input '{vybrany_text}' is incorrect.\nInput needs to be number between {pripustne_vstupy[0]} and {pripustne_vstupy[-1]}.\nThe program will be terminated.")
     print(caradvoj_dlouha)
     exit()
 # print(TEXT_FINAL_LIST)    # Kontrolní print
@@ -102,8 +110,8 @@ delky_slov = []
 for slovo in TEXT_FINAL_LIST:
     if slovo.istitle() and slovo[0].isalpha:
         pocet_slov_Title += 1
-    elif slovo.isupper() and slovo.isalpha:
-        pocet_slov_UPPER += 1
+        if slovo.isupper() and slovo.isalpha:
+            pocet_slov_UPPER += 1
     elif slovo.islower() and slovo.isalpha:
         pocet_slov_lower += 1
     elif slovo.isnumeric():
@@ -121,10 +129,7 @@ print(f"The sum of all the numbers: {soucet_cisel}\n{carajedno_dlouha}")
 for slovo in TEXT_FINAL_LIST:
     ciste_slovo = slovo.strip(".,!? ")
     delky_slov.append(len(ciste_slovo))
-# print(delky_slov)         # Kontrolní print listu
-
 vycet_delek_slov = set(delky_slov)
-# print(vycet_delek_slov)   # Kontrolní print setu
 
 print("Occurrences of word lengths:")
 print("+---------------------------------------+")
