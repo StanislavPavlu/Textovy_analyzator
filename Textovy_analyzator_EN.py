@@ -100,11 +100,11 @@ soucet_cisel = 0        # Součet všech čísel:
 delky_slov = []
 
 for slovo in TEXT_FINAL_LIST:
-    if slovo.istitle():
+    if slovo.istitle() and slovo[0].isalpha:
         pocet_slov_Title += 1
-    elif slovo.isupper():
+    elif slovo.isupper() and slovo.isalpha:
         pocet_slov_UPPER += 1
-    elif slovo.islower():
+    elif slovo.islower() and slovo.isalpha:
         pocet_slov_lower += 1
     elif slovo.isnumeric():
         pocet_cisel += 1
