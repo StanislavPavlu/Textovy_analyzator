@@ -3,7 +3,7 @@
 Textovy_analyzator.py: první projekt do Engeto Online Python Akademie
 author: Stanislav Pavlů
 email: standic@seznam.cz
-discord: Standa P. standa_40063
+discord: Standa P. (standa_40063)
 """
 
 # Texty na výběr (list):
